@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
 class SecurityConfig {
@@ -17,7 +18,7 @@ class SecurityConfig {
     fun passwordEncoder() = BCryptPasswordEncoder()
 
     @Bean
-    fun users(encoder: BCryptPasswordEncoder): InMemoryUserDetailsManager {
+    fun users(encoder: PasswordEncoder): InMemoryUserDetailsManager {
         val user1 = User.withUsername("user1")
             .password(encoder.encode("pass1"))
             .roles("USER")
